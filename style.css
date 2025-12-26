@@ -6,15 +6,24 @@ body {
 
 h1 {
   color: #333;
+  margin-bottom: 20px;
 }
 
 section {
   margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;
+  max-width: 650px;
+}
+
+#input-section {
+  margin: 20px 0;
 }
 
 input[type="number"] {
   padding: 5px;
   font-size: 16px;
+  width: 120px;
 }
 
 button {
@@ -34,4 +43,7 @@ pre {
 canvas {
   border: 1px solid #ccc;
   margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
