@@ -21,14 +21,16 @@
   <section id="golden-ratio">
     <h2>황금비란?</h2>
     <p>
-      황금비(φ)는 약 1.618로, <strong>두 수의 비율이 전체에 대한 큰 수의 비율과 같을 때</strong> 나타납니다.<br>
-      피보나치 수열에서 <em>F(n)/F(n-1)</em>이 n이 커짐에 따라 황금비에 수렴합니다.
+      황금비(φ)는 약 1.618이며, <strong>두 수의 비율이 전체에 대한 큰 수의 비율과 같을 때</strong> 나타납니다.<br>
+      피보나치 수열에서 <em>F(n)/F(n-1)</em>은 n이 커짐에 따라 황금비에 수렴합니다.
     </p>
   </section>
 
   <!-- 수열 입력 -->
-  <input type="number" id="n" placeholder="항의 개수 입력" value="20">
-  <button onclick="calculate()">수열 계산</button>
+  <div id="input-section">
+    <input type="number" id="n" placeholder="항의 개수 입력" value="20">
+    <button onclick="calculate()">수열 계산</button>
+  </div>
 
   <!-- 결과 출력 -->
   <pre id="result">여기에 결과가 출력됩니다.</pre>
