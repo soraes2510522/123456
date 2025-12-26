@@ -1,3 +1,4 @@
+// ---- 피보나치 계산 버튼 ----
 document.getElementById("calcBtn").addEventListener("click", calculate);
 
 function calculate() {
@@ -6,8 +7,6 @@ function calculate() {
   const canvas = document.getElementById("chart");
   const ctx = canvas.getContext("2d");
   const table = document.getElementById("ratioTable");
-  const spiralCanvas = document.getElementById("goldenSpiral");
-  const sCtx = spiralCanvas.getContext("2d");
 
   if (n < 2) {
     result.textContent = "2 이상의 수를 입력하세요.";
@@ -80,16 +79,19 @@ function calculate() {
     row.insertCell(1).textContent = fib[i];
     row.insertCell(2).textContent = i === 0 ? "-" : (fib[i] / fib[i - 1]).toFixed(3);
   }
+}
 
-  // ---- 앵무조개 느낌 황금 나선 ----
-  sCtx.clearRect(0, 0, spiralCanvas.width, spiralCanvas.height);
+// ---- 황금 나선 (항 입력과 무관, 항상 표시) ----
+window.onload = function() {
+  const spiralCanvas = document.getElementById("goldenSpiral");
+  const sCtx = spiralCanvas.getContext("2d");
 
   const centerX = spiralCanvas.width / 2;
   const centerY = spiralCanvas.height / 2;
-  const phi = 1.618;    // 황금비
-  const baseScale = 10;  // 확대해서 크게
-  const rotations = 6;   // 회전 수 증가
-  const step = 0.02;     // θ 증가 단위
+  const phi = 1.618;
+  const baseScale = 10;   // 크게
+  const rotations = 6;     // 나선 회전 수
+  const step = 0.02;
   const maxTheta = rotations * 2 * Math.PI;
 
   sCtx.beginPath();
@@ -105,4 +107,9 @@ function calculate() {
   }
 
   sCtx.stroke();
-}
+
+  // ---- 황금비 표시 ----
+  sCtx.font = "20px Arial";
+  sCtx.fillStyle = "#0000FF";
+  sCtx.fillText("황금비 φ ≈ 1.618", centerX + 10, 30);
+};
