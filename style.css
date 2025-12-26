@@ -3,10 +3,19 @@ body {
   margin: 20px;
 }
 
+h1 {
+  text-align: center;
+}
+
+p {
+  line-height: 1.5;
+}
+
 input {
   width: 150px;
   padding: 5px;
   font-size: 14px;
+  margin-right: 5px;
 }
 
 button {
