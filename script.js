@@ -14,8 +14,7 @@ function calculate() {
     return;
   }
 
-  // -------------------
-  // 피보나치 수열 계산
+  // ---- 피보나치 수열 계산 ----
   let fib = [0, 1];
   for (let i = 2; i < n; i++) fib[i] = fib[i - 1] + fib[i - 2];
   result.textContent = fib.join(", ");
@@ -27,7 +26,6 @@ function calculate() {
   const graphHeight = canvas.height - padding * 2;
   const maxValue = Math.max(...fib);
 
-  // 축 그리기
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
@@ -83,19 +81,23 @@ function calculate() {
     row.insertCell(2).textContent = i === 0 ? "-" : (fib[i] / fib[i - 1]).toFixed(3);
   }
 
-  // ---- 황금 나선 (부드러운 곡선) ----
+  // ---- 앵무조개 느낌 황금 나선 ----
   sCtx.clearRect(0, 0, spiralCanvas.width, spiralCanvas.height);
 
   const centerX = spiralCanvas.width / 2;
   const centerY = spiralCanvas.height / 2;
-  const phi = 1.618;  // 황금비
-  const scale = 2;     // 크기 조절
+  const phi = 1.618;    // 황금비
+  const baseScale = 10;  // 확대해서 크게
+  const rotations = 6;   // 회전 수 증가
+  const step = 0.02;     // θ 증가 단위
+  const maxTheta = rotations * 2 * Math.PI;
+
   sCtx.beginPath();
   sCtx.strokeStyle = "#FF4500";
   sCtx.lineWidth = 2;
 
-  for (let t = 0; t < 15 * Math.PI; t += 0.02) { // 충분히 큰 θ 범위
-    const r = scale * Math.pow(phi, t / (2 * Math.PI)); // r = a * φ^(θ/2π)
+  for (let t = 0; t <= maxTheta; t += step) {
+    const r = baseScale * Math.pow(phi, t / (2 * Math.PI));
     const x = centerX + r * Math.cos(t);
     const y = centerY + r * Math.sin(t);
     if (t === 0) sCtx.moveTo(x, y);
