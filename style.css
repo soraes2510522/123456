@@ -1,17 +1,37 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+  text-align: center;
 }
 
-h1 { text-align: center; }
-h2 { margin-top: 30px; }
-p { line-height: 1.5; }
+h1 {
+  color: #333;
+}
 
-input { width: 150px; padding: 5px; font-size: 14px; margin-right: 5px; }
-button { padding: 5px 10px; font-size: 14px; cursor: pointer; }
+section {
+  margin-bottom: 20px;
+}
 
-canvas { border: 1px solid #000; margin-top: 20px; display: block; margin-left:auto; margin-right:auto; }
+input[type="number"] {
+  padding: 5px;
+  font-size: 16px;
+}
 
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-th, td { border: 1px solid #000; text-align: center; padding: 5px; }
-th { background-color: #f0f0f0; }
+button {
+  padding: 5px 10px;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+pre {
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: left;
+  overflow-x: auto;
+}
+
+canvas {
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
