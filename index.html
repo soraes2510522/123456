@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>피보나치 수열 알고리즘 탐구</title>
-  <!-- CSS 연결: index.html과 같은 폴더 -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +12,10 @@
   <p>피보나치 수열(Fibonacci Sequence)은 앞의 두 항의 합으로 다음 항이 만들어지는 수열입니다.</p>
 
   <h2>2. 황금비와의 관계</h2>
-  <p>황금비는 약 1.618이며, 피보나치 수열의 항들 사이 비율은 n이 커질수록 황금비에 가까워집니다.</p>
+  <p>
+    황금비는 약 1.618이며, 피보나치 수열의 항들 사이 비율 F(n)/F(n-1)은 
+    n이 커질수록 황금비에 가까워집니다. 자연과 예술 속에서도 발견됩니다.
+  </p>
 
   <h2>3. 프로그램 사용법</h2>
   <input type="number" id="n" placeholder="항의 개수 입력">
@@ -21,9 +23,10 @@
 
   <pre id="result">결과가 여기에 표시됩니다.</pre>
 
+  <h2>4. 피보나치 수열 그래프</h2>
   <canvas id="chart" width="800" height="500"></canvas>
 
-  <h2>항별 피보나치 수와 F(n)/F(n-1) 비율</h2>
+  <h2>5. 항별 피보나치 수와 F(n)/F(n-1) 비율</h2>
   <table id="ratioTable">
     <tr>
       <th>항 번호 n</th>
@@ -32,10 +35,15 @@
     </tr>
   </table>
 
-  <h2>4. 황금비 수렴 과정</h2>
-  <p>F(n)/F(n-1)은 항이 커질수록 약 1.618로 수렴합니다. 이를 표와 그래프를 통해 확인할 수 있습니다.</p>
+  <h2>6. F(n)/F(n-1) 황금비 수렴 그래프</h2>
+  <canvas id="goldenChart" width="800" height="400"></canvas>
 
-  <!-- JS 연결: index.html과 같은 폴더 -->
+  <h2>7. 황금비 수렴 과정</h2>
+  <p>
+    F(n)/F(n-1)은 항이 커질수록 약 1.618로 수렴합니다.  
+    이를 그래프와 표를 통해 직관적으로 확인할 수 있습니다.
+  </p>
+
   <script src="script.js"></script>
 </body>
 </html>
