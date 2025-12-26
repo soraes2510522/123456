@@ -10,6 +10,9 @@ h1 {
 
 section {
   margin-bottom: 20px;
+  text-align: left;
+  display: inline-block;
+  max-width: 650px;
 }
 
 input[type="number"] {
