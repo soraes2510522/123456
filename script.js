@@ -14,6 +14,7 @@ function calculate() {
     return;
   }
 
+  // -------------------
   // 피보나치 수열 계산
   let fib = [0, 1];
   for (let i = 2; i < n; i++) fib[i] = fib[i - 1] + fib[i - 2];
@@ -26,6 +27,7 @@ function calculate() {
   const graphHeight = canvas.height - padding * 2;
   const maxValue = Math.max(...fib);
 
+  // 축 그리기
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
@@ -34,7 +36,6 @@ function calculate() {
 
   ctx.font = "14px Arial";
   ctx.fillText("항 번호 (n)", canvas.width / 2 - 30, canvas.height - padding + 35);
-
   ctx.save();
   ctx.translate(20, canvas.height / 2);
   ctx.rotate(-Math.PI / 2);
@@ -84,21 +85,28 @@ function calculate() {
 
   // ---- 황금 나선 ----
   sCtx.clearRect(0, 0, spiralCanvas.width, spiralCanvas.height);
-  let x = spiralCanvas.width / 2;
-  let y = spiralCanvas.height / 2;
+  const centerX = spiralCanvas.width / 2;
+  const centerY = spiralCanvas.height / 2;
   let angle = 0;
-  let scale = 5; // 크기 조절
+  let scale = 5; // 나선 크기 조절
+  let x = centerX;
+  let y = centerY;
+
   sCtx.beginPath();
   sCtx.moveTo(x, y);
-
-  for (let i = 0; i < n; i++) {
-    let radius = fib[i] * scale / fib[n-1];
-    angle += Math.PI / 2; // 90도씩 증가
-    x += radius * Math.cos(angle);
-    y += radius * Math.sin(angle);
-    sCtx.lineTo(x, y);
-  }
   sCtx.strokeStyle = "#FF4500";
   sCtx.lineWidth = 2;
+
+  // 각도를 작은 단위로 돌면서 부드러운 곡선 생성
+  for (let i = 0; i < n; i++) {
+    const steps = 50; // 각 피보나치 항마다 나누는 각도 단계
+    const radiusIncrement = fib[i] * scale / fib[n-1];
+    for (let j = 0; j < steps; j++) {
+      angle += (Math.PI / 2) / steps; // 90도 회전을 작은 단계로
+      x += (radiusIncrement / steps) * Math.cos(angle);
+      y += (radiusIncrement / steps) * Math.sin(angle);
+      sCtx.lineTo(x, y);
+    }
+  }
   sCtx.stroke();
 }
