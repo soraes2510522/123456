@@ -90,9 +90,9 @@ window.onload = function() {
   const canvas = document.getElementById("goldenSpiral"); 
   const ctx = canvas.getContext("2d");
 
-  const width = 400;                 // 사각형 폭
-  const phi = 1.618;                 // 황금비
-  const height = width / phi;        // 황금비에 따른 높이
+  const width = 400;                 
+  const phi = 1.618;                 
+  const height = width / phi;        
   const startX = (canvas.width - width) / 2;
   const startY = (canvas.height - height) / 2;
 
@@ -118,14 +118,10 @@ window.onload = function() {
   ctx.lineTo(startX + width, startY + height);
   ctx.stroke();
 
-  // 세로선 위에 비율 표시 (회전)
+  // 세로선 위에 비율 표시 (텍스트만)
   ctx.save();
   ctx.translate(startX - 10, startY + height / 2 + 5);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText("세로 1.618", 0, 0);
-  ctx.beginPath();
-  ctx.moveTo(0, -height / 2);
-  ctx.lineTo(0, height / 2);
-  ctx.stroke();
   ctx.restore();
 };
