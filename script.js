@@ -21,7 +21,7 @@ function calculate() {
   // ③ 그래프 초기화
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const padding = 70; // 글자 여유 확보
+  const padding = 70;
   const graphWidth = canvas.width - padding * 2;
   const graphHeight = canvas.height - padding * 2;
 
@@ -64,7 +64,7 @@ function calculate() {
     if (y < padding) y = padding;
 
     // 숫자 길이에 따라 x좌표 조정
-    let xPos = 50 - value.toString().length * 3; 
+    let xPos = 50 - value.toString().length * 3;
     ctx.fillText(value, xPos, y + 3);
   }
 
