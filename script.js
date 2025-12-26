@@ -81,35 +81,23 @@ function calculate() {
   }
 }
 
-// ---- 황금 나선 (항 입력과 무관, 항상 표시) ----
+// ---- 황금 사각형 (항 입력과 무관) ----
 window.onload = function() {
-  const spiralCanvas = document.getElementById("goldenSpiral");
-  const sCtx = spiralCanvas.getContext("2d");
+  const canvas = document.getElementById("goldenSpiral"); // id 그대로
+  const ctx = canvas.getContext("2d");
 
-  const centerX = spiralCanvas.width / 2;
-  const centerY = spiralCanvas.height / 2;
-  const phi = 1.618;
-  const baseScale = 10;   // 크게
-  const rotations = 6;     // 나선 회전 수
-  const step = 0.02;
-  const maxTheta = rotations * 2 * Math.PI;
+  const width = 400; // 사각형 폭
+  const height = width / 1.618; // 황금비 적용
+  const startX = (canvas.width - width) / 2;
+  const startY = (canvas.height - height) / 2;
 
-  sCtx.beginPath();
-  sCtx.strokeStyle = "#FF4500";
-  sCtx.lineWidth = 2;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  for (let t = 0; t <= maxTheta; t += step) {
-    const r = baseScale * Math.pow(phi, t / (2 * Math.PI));
-    const x = centerX + r * Math.cos(t);
-    const y = centerY + r * Math.sin(t);
-    if (t === 0) sCtx.moveTo(x, y);
-    else sCtx.lineTo(x, y);
-  }
+  ctx.strokeStyle = "#FF4500";
+  ctx.lineWidth = 3;
+  ctx.strokeRect(startX, startY, width, height);
 
-  sCtx.stroke();
-
-  // ---- 황금비 표시 ----
-  sCtx.font = "20px Arial";
-  sCtx.fillStyle = "#0000FF";
-  sCtx.fillText("황금비 φ ≈ 1.618", centerX + 10, 30);
+  ctx.font = "20px Arial";
+  ctx.fillStyle = "#0000FF";
+  ctx.fillText("황금비 φ ≈ 1.618", startX + 10, startY - 10);
 };
