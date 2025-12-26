@@ -5,7 +5,7 @@ function calculate() {
   // 피보나치 수열 계산
   let fib = [0, 1];
   for (let i = 2; i < n; i++) {
-    fib[i] = fib[i - 1] + fib[i - 2]; // 이전 두 항을 더해 새로운 항 계산
+    fib[i] = fib[i - 1] + fib[i - 2];
   }
 
   // 결과 출력
@@ -13,7 +13,7 @@ function calculate() {
   result += fib.join(", ");
   document.getElementById("result").textContent = result;
 
-  drawGraph(fib); // 그래프와 황금비 사각형 표시
+  drawGraph(fib);
 }
 
 function drawGraph(fib) {
@@ -26,7 +26,7 @@ function drawGraph(fib) {
   const height = canvas.height - margin * 2;
   const max = Math.max(...fib);
 
-  // 피보나치 수열 선 그래프
+  // 선 그래프
   ctx.beginPath();
   for (let i = 0; i < fib.length; i++) {
     const x = margin + (i / (fib.length - 1)) * width;
@@ -48,7 +48,7 @@ function drawGraph(fib) {
     ctx.fillText(ratio, x + 2, y - 2);
   }
 
-  // 황금비 사각형 시각화
+  // 황금비 사각형
   const startX = canvas.width - 180;
   const startY = 50;
   const side = 100;
@@ -56,13 +56,12 @@ function drawGraph(fib) {
   ctx.strokeStyle = "red";
   ctx.lineWidth = 2;
 
-  // 작은 정사각형
+  // 정사각형
   ctx.strokeRect(startX, startY, side, side);
 
-  // 황금비 사각형 (가로:세로 = 1.618)
+  // 황금비 사각형
   ctx.strokeRect(startX - side * 1.618, startY, side * 1.618, side);
 
-  // 비율 텍스트
   ctx.fillStyle = "black";
   ctx.fillText("가로: 1.618", startX - 50, startY + 15);
   ctx.fillText("세로: 1", startX + 5, startY + side / 2);
