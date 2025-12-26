@@ -6,10 +6,8 @@ function calculate() {
   const canvas = document.getElementById("chart");
   const ctx = canvas.getContext("2d");
   const table = document.getElementById("ratioTable");
-  const goldenCanvas = document.getElementById("goldenChart");
-  const gCtx = goldenCanvas.getContext("2d");
-  const canvasGR = document.getElementById("goldenRect");
-  const ctxGR = canvasGR.getContext("2d");
+  const spiralCanvas = document.getElementById("goldenSpiral");
+  const sCtx = spiralCanvas.getContext("2d");
 
   if (n < 2) {
     result.textContent = "2 이상의 수를 입력하세요.";
@@ -84,67 +82,23 @@ function calculate() {
     row.insertCell(2).textContent = i === 0 ? "-" : (fib[i] / fib[i - 1]).toFixed(3);
   }
 
-  // ---- 황금비 수렴 그래프 ----
-  gCtx.clearRect(0, 0, goldenCanvas.width, goldenCanvas.height);
-  const gPadding = 50;
-  const gWidth = goldenCanvas.width - gPadding * 2;
-  const gHeight = goldenCanvas.height - gPadding * 2;
+  // ---- 황금 나선 ----
+  sCtx.clearRect(0, 0, spiralCanvas.width, spiralCanvas.height);
+  let x = spiralCanvas.width / 2;
+  let y = spiralCanvas.height / 2;
+  let angle = 0;
+  let scale = 5; // 크기 조절
+  sCtx.beginPath();
+  sCtx.moveTo(x, y);
 
-  gCtx.beginPath();
-  gCtx.moveTo(gPadding, gPadding);
-  gCtx.lineTo(gPadding, goldenCanvas.height - gPadding);
-  gCtx.lineTo(goldenCanvas.width - gPadding, goldenCanvas.height - gPadding);
-  gCtx.stroke();
-
-  gCtx.save();
-  gCtx.translate(20, goldenCanvas.height / 2);
-  gCtx.rotate(-Math.PI / 2);
-  gCtx.fillText("F(n)/F(n-1)", 0, 0);
-  gCtx.restore();
-
-  gCtx.font = "14px Arial";
-  gCtx.fillText("항 번호 (n)", goldenCanvas.width / 2 - 30, goldenCanvas.height - gPadding + 35);
-
-  const ratios = fib.slice(1).map((v,i) => v / fib[i]);
-  const maxRatio = Math.max(...ratios);
-
-  gCtx.font = "12px Arial";
-  for (let i = 0; i <= 10; i++) {
-    let value = 1 + i * (maxRatio - 1)/10;
-    let y = goldenCanvas.height - gPadding - ((value - 1) / (maxRatio - 1)) * gHeight;
-    gCtx.fillText(value.toFixed(3), gPadding - 40, y + 3);
+  for (let i = 0; i < n; i++) {
+    let radius = fib[i] * scale / fib[n-1];
+    angle += Math.PI / 2; // 90도씩 증가
+    x += radius * Math.cos(angle);
+    y += radius * Math.sin(angle);
+    sCtx.lineTo(x, y);
   }
-
-  gCtx.beginPath();
-  gCtx.strokeStyle = "red";
-  gCtx.lineWidth = 3;
-  ratios.forEach((ratio, index) => {
-    let x = gPadding + (index / (n - 2)) * gWidth;
-    let y = goldenCanvas.height - gPadding - ((ratio - 1) / (maxRatio - 1)) * gHeight;
-    if (index === 0) gCtx.moveTo(x, y);
-    else gCtx.lineTo(x, y);
-  });
-  gCtx.stroke();
-
-  gCtx.beginPath();
-  gCtx.strokeStyle = "green";
-  gCtx.setLineDash([5, 5]);
-  let yGolden = goldenCanvas.height - gPadding - ((1.618 - 1)/(maxRatio - 1)) * gHeight;
-  gCtx.moveTo(gPadding, yGolden);
-  gCtx.lineTo(goldenCanvas.width - gPadding, yGolden);
-  gCtx.stroke();
-  gCtx.setLineDash([]);
-  gCtx.fillText("황금비 ≈ 1.618", goldenCanvas.width - gPadding - 80, yGolden - 5);
-
-  // ---- 황금 사각형 ----
-  ctxGR.clearRect(0,0,canvasGR.width,canvasGR.height);
-  let w = 300;
-  let h = w / 1.618;
-  let x = 50, y = 50;
-  ctxGR.fillStyle = "#FFD700";
-  ctxGR.fillRect(x, y, w, h);
-  ctxGR.strokeRect(x, y, w, h);
-  ctxGR.font = "16px Arial";
-  ctxGR.fillStyle = "#000";
-  ctxGR.fillText("황금 사각형", x + 50, y + h/2);
+  sCtx.strokeStyle = "#FF4500";
+  sCtx.lineWidth = 2;
+  sCtx.stroke();
 }
