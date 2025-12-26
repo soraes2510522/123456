@@ -8,6 +8,8 @@ function calculate() {
   const table = document.getElementById("ratioTable");
   const goldenCanvas = document.getElementById("goldenChart");
   const gCtx = goldenCanvas.getContext("2d");
+  const canvasGR = document.getElementById("goldenRect");
+  const ctxGR = canvasGR.getContext("2d");
 
   if (n < 2) {
     result.textContent = "2 이상의 수를 입력하세요.";
@@ -17,7 +19,6 @@ function calculate() {
   // 피보나치 수열 계산
   let fib = [0, 1];
   for (let i = 2; i < n; i++) fib[i] = fib[i - 1] + fib[i - 2];
-
   result.textContent = fib.join(", ");
 
   // ---- 피보나치 그래프 ----
@@ -27,7 +28,6 @@ function calculate() {
   const graphHeight = canvas.height - padding * 2;
   const maxValue = Math.max(...fib);
 
-  // 축
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
@@ -90,7 +90,6 @@ function calculate() {
   const gWidth = goldenCanvas.width - gPadding * 2;
   const gHeight = goldenCanvas.height - gPadding * 2;
 
-  // 축
   gCtx.beginPath();
   gCtx.moveTo(gPadding, gPadding);
   gCtx.lineTo(gPadding, goldenCanvas.height - gPadding);
@@ -109,7 +108,6 @@ function calculate() {
   const ratios = fib.slice(1).map((v,i) => v / fib[i]);
   const maxRatio = Math.max(...ratios);
 
-  // y축
   gCtx.font = "12px Arial";
   for (let i = 0; i <= 10; i++) {
     let value = 1 + i * (maxRatio - 1)/10;
@@ -117,7 +115,6 @@ function calculate() {
     gCtx.fillText(value.toFixed(3), gPadding - 40, y + 3);
   }
 
-  // 그래프
   gCtx.beginPath();
   gCtx.strokeStyle = "red";
   gCtx.lineWidth = 3;
@@ -129,7 +126,6 @@ function calculate() {
   });
   gCtx.stroke();
 
-  // 황금비 선
   gCtx.beginPath();
   gCtx.strokeStyle = "green";
   gCtx.setLineDash([5, 5]);
@@ -139,4 +135,16 @@ function calculate() {
   gCtx.stroke();
   gCtx.setLineDash([]);
   gCtx.fillText("황금비 ≈ 1.618", goldenCanvas.width - gPadding - 80, yGolden - 5);
+
+  // ---- 황금 사각형 ----
+  ctxGR.clearRect(0,0,canvasGR.width,canvasGR.height);
+  let w = 300;
+  let h = w / 1.618;
+  let x = 50, y = 50;
+  ctxGR.fillStyle = "#FFD700";
+  ctxGR.fillRect(x, y, w, h);
+  ctxGR.strokeRect(x, y, w, h);
+  ctxGR.font = "16px Arial";
+  ctxGR.fillStyle = "#000";
+  ctxGR.fillText("황금 사각형", x + 50, y + h/2);
 }
