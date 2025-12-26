@@ -1,3 +1,5 @@
+document.getElementById("calcBtn").addEventListener("click", calculate);
+
 function calculate() {
   const n = parseInt(document.getElementById("n").value);
   const result = document.getElementById("result");
@@ -10,16 +12,11 @@ function calculate() {
     return;
   }
 
-  // 피보나치 수열 계산 (반복 알고리즘)
   let fib = [0, 1];
-  for (let i = 2; i < n; i++) {
-    fib[i] = fib[i - 1] + fib[i - 2];
-  }
+  for (let i = 2; i < n; i++) fib[i] = fib[i - 1] + fib[i - 2];
 
-  // 텍스트 결과 출력
   result.textContent = fib.join(", ");
 
-  // 그래프 초기화
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const padding = 70;
@@ -27,18 +24,16 @@ function calculate() {
   const graphHeight = canvas.height - padding * 2;
   const maxValue = Math.max(...fib);
 
-  // 축 그리기
+  // 축
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
   ctx.lineTo(canvas.width - padding, canvas.height - padding);
   ctx.stroke();
 
-  // x축 이름
   ctx.font = "14px Arial";
   ctx.fillText("항 번호 (n)", canvas.width / 2 - 30, canvas.height - padding + 35);
 
-  // y축 이름
   ctx.save();
   ctx.translate(20, canvas.height / 2);
   ctx.rotate(-Math.PI / 2);
@@ -52,7 +47,7 @@ function calculate() {
     ctx.fillText(i + 1, x - 5, canvas.height - padding + 20);
   }
 
-  // y축 눈금 자동 조절
+  // y축 눈금
   let yTicks = n <= 5 ? 5 : n <= 15 ? 10 : 15;
   for (let i = 0; i <= yTicks; i++) {
     let value = Math.round((maxValue / yTicks) * i);
@@ -61,7 +56,7 @@ function calculate() {
     ctx.fillText(value, 50 - value.toString().length * 3, y + 3);
   }
 
-  // 그래프 선 그리기
+  // 그래프
   ctx.beginPath();
   ctx.strokeStyle = "blue";
   ctx.lineWidth = 3;
@@ -74,7 +69,7 @@ function calculate() {
   });
   ctx.stroke();
 
-  // 표 업데이트
+  // 표
   table.innerHTML = `
     <tr>
       <th>항 번호 n</th>
@@ -84,12 +79,8 @@ function calculate() {
   `;
   for (let i = 0; i < fib.length; i++) {
     const row = table.insertRow();
-    const cell1 = row.insertCell(0);
-    const cell2 = row.insertCell(1);
-    const cell3 = row.insertCell(2);
-
-    cell1.textContent = i + 1;
-    cell2.textContent = fib[i];
-    cell3.textContent = i === 0 ? "-" : (fib[i] / fib[i - 1]).toFixed(3);
+    row.insertCell(0).textContent = i + 1;
+    row.insertCell(1).textContent = fib[i];
+    row.insertCell(2).textContent = i === 0 ? "-" : (fib[i] / fib[i - 1]).toFixed(3);
   }
 }
