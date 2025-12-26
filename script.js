@@ -25,6 +25,7 @@ function calculate() {
   const graphHeight = canvas.height - padding * 2;
   const maxValue = Math.max(...fib);
 
+  // 좌표축
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
@@ -39,12 +40,14 @@ function calculate() {
   ctx.fillText("피보나치 수 F(n)", 0, 0);
   ctx.restore();
 
+  // x축 번호
   ctx.font = "12px Arial";
   for (let i = 0; i < n; i++) {
     let x = padding + (i / (n - 1)) * graphWidth;
     ctx.fillText(i + 1, x - 5, canvas.height - padding + 20);
   }
 
+  // y축 눈금
   let yTicks = n <= 5 ? 5 : n <= 15 ? 10 : 15;
   for (let i = 0; i <= yTicks; i++) {
     let value = Math.round((maxValue / yTicks) * i);
@@ -53,6 +56,7 @@ function calculate() {
     ctx.fillText(value, 50 - value.toString().length * 3, y + 3);
   }
 
+  // 그래프 그리기
   ctx.beginPath();
   ctx.strokeStyle = "blue";
   ctx.lineWidth = 3;
@@ -81,7 +85,7 @@ function calculate() {
   }
 }
 
-// ---- 황금 사각형 (항 입력과 무관, 가로·세로 비율 표시) ----
+// ---- 황금비 사각형 (항 입력과 무관, 선 위 비율 표시) ----
 window.onload = function() {
   const canvas = document.getElementById("goldenSpiral"); 
   const ctx = canvas.getContext("2d");
@@ -99,22 +103,29 @@ window.onload = function() {
   ctx.lineWidth = 3;
   ctx.strokeRect(startX, startY, width, height);
 
-  // 자세한 비율 텍스트 표시
+  // 텍스트 표시: 황금비 사각형 이름
   ctx.font = "18px Arial";
   ctx.fillStyle = "#0000FF";
-  ctx.fillText(`황금비 φ ≈ 1.618`, startX + 10, startY - 60);
-  ctx.fillText(`φ = (1 + √5) / 2`, startX + 10, startY - 40);
-  ctx.fillText(`가로:세로 = 1 : 1.618`, startX + 10, startY - 20);
+  ctx.fillText(`황금비 사각형 (Golden Ratio Rectangle)`, startX + 10, startY - 40);
+  ctx.fillText(`φ = (1 + √5) / 2 ≈ 1.618`, startX + 10, startY - 20);
 
-  // 가로변에 비율 표시
+  // 가로선 위에 비율 표시
   ctx.font = "16px Arial";
   ctx.fillStyle = "#FF0000";
-  ctx.fillText("가로 1", startX + width / 2 - 20, startY + height + 20);
+  ctx.fillText("가로 1", startX + width / 2 - 20, startY + height + 15);
+  ctx.beginPath();
+  ctx.moveTo(startX, startY + height);
+  ctx.lineTo(startX + width, startY + height);
+  ctx.stroke();
 
-  // 세로변에 비율 표시 (회전)
+  // 세로선 위에 비율 표시 (회전)
   ctx.save();
-  ctx.translate(startX - 20, startY + height / 2 + 10);
+  ctx.translate(startX - 10, startY + height / 2 + 5);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText("세로 1.618", 0, 0);
+  ctx.beginPath();
+  ctx.moveTo(0, -height / 2);
+  ctx.lineTo(0, height / 2);
+  ctx.stroke();
   ctx.restore();
 };
