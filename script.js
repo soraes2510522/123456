@@ -81,23 +81,28 @@ function calculate() {
   }
 }
 
-// ---- 황금 사각형 (항 입력과 무관) ----
+// ---- 황금 사각형 (항 입력과 무관, 자세한 비율 표시) ----
 window.onload = function() {
-  const canvas = document.getElementById("goldenSpiral"); // id 그대로
+  const canvas = document.getElementById("goldenSpiral"); 
   const ctx = canvas.getContext("2d");
 
-  const width = 400; // 사각형 폭
-  const height = width / 1.618; // 황금비 적용
+  const width = 400;                 // 사각형 폭
+  const phi = 1.618;                 // 황금비
+  const height = width / phi;        // 황금비에 따른 높이
   const startX = (canvas.width - width) / 2;
   const startY = (canvas.height - height) / 2;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  // 사각형 그리기
   ctx.strokeStyle = "#FF4500";
   ctx.lineWidth = 3;
   ctx.strokeRect(startX, startY, width, height);
 
-  ctx.font = "20px Arial";
+  // 자세한 비율 텍스트 표시
+  ctx.font = "18px Arial";
   ctx.fillStyle = "#0000FF";
-  ctx.fillText("황금비 φ ≈ 1.618", startX + 10, startY - 10);
+  ctx.fillText(`황금비 φ ≈ 1.618`, startX + 10, startY - 60);
+  ctx.fillText(`φ = (1 + √5) / 2`, startX + 10, startY - 40);
+  ctx.fillText(`가로:세로 = ${width}:${height.toFixed(1)} ≈ φ`, startX + 10, startY - 20);
 };
