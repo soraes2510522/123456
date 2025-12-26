@@ -3,6 +3,7 @@ function calculate() {
   const result = document.getElementById("result");
   const canvas = document.getElementById("chart");
   const ctx = canvas.getContext("2d");
+  const table = document.getElementById("ratioTable");
 
   if (n < 2) {
     result.textContent = "2 이상의 수를 입력하세요.";
@@ -24,7 +25,6 @@ function calculate() {
   const padding = 70;
   const graphWidth = canvas.width - padding * 2;
   const graphHeight = canvas.height - padding * 2;
-
   const maxValue = Math.max(...fib);
 
   // ④ 축 그리기
@@ -63,7 +63,6 @@ function calculate() {
     let y = canvas.height - padding - (value / maxValue) * graphHeight;
     if (y < padding) y = padding;
 
-    // 숫자 길이에 따라 x좌표 조정
     let xPos = 50 - value.toString().length * 3;
     ctx.fillText(value, xPos, y + 3);
   }
@@ -72,7 +71,6 @@ function calculate() {
   ctx.beginPath();
   ctx.strokeStyle = "blue";
   ctx.lineWidth = 3;
-
   fib.forEach((value, index) => {
     let x = padding + (index / (n - 1)) * graphWidth;
     let y = canvas.height - padding - (value / maxValue) * graphHeight;
@@ -80,6 +78,24 @@ function calculate() {
     if (index === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
-
   ctx.stroke();
+
+  // ⑩ 표 업데이트
+  table.innerHTML = `
+    <tr>
+      <th>항 번호 n</th>
+      <th>F(n)</th>
+      <th>F(n)/F(n-1)</th>
+    </tr>
+  `;
+  for (let i = 0; i < fib.length; i++) {
+    const row = table.insertRow();
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    const cell3 = row.insertCell(2);
+
+    cell1.textContent = i + 1;
+    cell2.textContent = fib[i];
+    cell3.textContent = i === 0 ? "-" : (fib[i] / fib[i - 1]).toFixed(3);
+  }
 }
