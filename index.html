@@ -8,46 +8,31 @@
 <body>
   <h1>피보나치 수열 알고리즘 탐구</h1>
 
-  <h2>1. 피보나치 수열이란?</h2>
-  <p>
-    피보나치 수열(Fibonacci Sequence)은 앞의 두 항의 합으로 다음 항이 만들어지는 수열입니다.
-  </p>
-  <p>
-    수학적으로는 다음과 같이 정의됩니다:
-  </p>
-  <p style="text-align:center; font-weight:bold;">
-    F(0) = 0, F(1) = 1, F(n) = F(n-1) + F(n-2) (n ≥ 2)
-  </p>
+  <!-- 피보나치 수열 정의 -->
+  <section id="definition">
+    <h2>피보나치 수열이란?</h2>
+    <p>
+      피보나치 수열은 <strong>앞의 두 항을 더해 다음 항을 만드는 수열</strong>입니다.<br>
+      수학적으로: <em>F(n) = F(n-1) + F(n-2), F(0)=0, F(1)=1</em>
+    </p>
+  </section>
 
-  <h2>2. 황금비와의 관계</h2>
-  <p>
-    황금비(φ)는 약 1.618이며, 피보나치 수열의 항들 사이 비율 F(n)/F(n-1)은 
-    n이 커질수록 황금비에 가까워집니다. 자연과 예술 속에서도 발견됩니다.
-  </p>
-  <p style="text-align:center; font-weight:bold;">
-    황금비 공식: φ = (1 + √5) / 2
-  </p>
+  <!-- 황금비 정의 -->
+  <section id="golden-ratio">
+    <h2>황금비란?</h2>
+    <p>
+      황금비(φ)는 약 1.618로, <strong>두 수의 비율이 전체에 대한 큰 수의 비율과 같을 때</strong> 나타납니다.<br>
+      피보나치 수열에서 <em>F(n)/F(n-1)</em>이 n이 커짐에 따라 황금비에 수렴합니다.
+    </p>
+  </section>
 
-  <h2>3. 프로그램 사용법</h2>
-  <input type="number" id="n" placeholder="항의 개수 입력">
-  <button id="calcBtn">수열 계산</button>
+  <!-- 수열 입력 -->
+  <input type="number" id="n" placeholder="항의 개수 입력" value="20">
+  <button onclick="calculate()">수열 계산</button>
 
-  <pre id="result">결과가 여기에 표시됩니다.</pre>
-
-  <h2>4. 피보나치 수열 그래프</h2>
-  <canvas id="chart" width="800" height="500"></canvas>
-
-  <h2>5. 항별 피보나치 수와 F(n)/F(n-1) 비율</h2>
-  <table id="ratioTable">
-    <tr>
-      <th>항 번호 n</th>
-      <th>F(n)</th>
-      <th>F(n)/F(n-1)</th>
-    </tr>
-  </table>
-
-  <h2>6. 황금비 사각형(Golden Ratio Rectangle)</h2>
-  <canvas id="goldenSpiral" width="600" height="600"></canvas>
+  <!-- 결과 출력 -->
+  <pre id="result">여기에 결과가 출력됩니다.</pre>
+  <canvas id="canvas" width="700" height="400"></canvas>
 
   <script src="script.js"></script>
 </body>
