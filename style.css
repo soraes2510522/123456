@@ -1,40 +1,31 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
-  text-align: center;
+  margin: 30px;
+  line-height: 1.6;
 }
 
 h1 {
-  color: #333;
+  text-align: center;
 }
 
-section {
-  margin-bottom: 20px;
-  text-align: left;
-  display: inline-block;
-  max-width: 650px;
-}
-
-input[type="number"] {
+input {
   padding: 5px;
-  font-size: 16px;
+  margin-right: 10px;
 }
 
 button {
-  padding: 5px 10px;
-  font-size: 16px;
-  margin-left: 10px;
+  padding: 6px 12px;
   cursor: pointer;
 }
 
 pre {
-  background-color: #f0f0f0;
+  background-color: #f4f4f4;
   padding: 10px;
-  text-align: left;
-  overflow-x: auto;
+  margin-top: 10px;
+  white-space: pre-wrap;
 }
 
 canvas {
-  border: 1px solid #ccc;
+  border: 1px solid black;
   margin-top: 20px;
 }
