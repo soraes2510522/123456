@@ -1,71 +1,93 @@
 function calculate() {
-  let n = document.getElementById("n").value || 20;
-  n = parseInt(n);
+  const n = parseInt(document.getElementById("n").value);
+  const result = document.getElementById("result");
+  const canvas = document.getElementById("chart");
+  const ctx = canvas.getContext("2d");
 
-  // 피보나치 수열 계산
+  // 입력 검증
+  if (isNaN(n)) {
+    result.textContent = "항의 개수를 입력하세요.";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return;
+  }
+
+  if (n < 2) {
+    result.textContent = "2 이상의 수를 입력하세요.";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    return;
+  }
+
+  // 피보나치 수열 정의
+  // F(0)=0, F(1)=1
+  // F(n)=F(n-1)+F(n-2)
   let fib = [0, 1];
   for (let i = 2; i < n; i++) {
     fib[i] = fib[i - 1] + fib[i - 2];
   }
 
   // 결과 출력
-  let result = "피보나치 수열 (" + n + "항):\n";
-  result += fib.join(", ");
-  document.getElementById("result").textContent = result;
+  result.textContent = fib.join(", ");
 
-  drawGraph(fib);
-}
-
-function drawGraph(fib) {
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
+  // 그래프 초기화
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  const margin = 50;
-  const width = canvas.width - margin * 2;
-  const height = canvas.height - margin * 2;
-  const max = Math.max(...fib);
+  const padding = 70;
+  const graphWidth = canvas.width - padding * 2;
+  const graphHeight = canvas.height - padding * 2;
+  const maxValue = Math.max(...fib);
 
-  // 선 그래프
+  // 축 그리기
   ctx.beginPath();
-  for (let i = 0; i < fib.length; i++) {
-    const x = margin + (i / (fib.length - 1)) * width;
-    const y = canvas.height - margin - (fib[i] / max) * height;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.strokeStyle = "blue";
-  ctx.lineWidth = 2;
+  ctx.moveTo(padding, padding);
+  ctx.lineTo(padding, canvas.height - padding);
+  ctx.lineTo(canvas.width - padding, canvas.height - padding);
   ctx.stroke();
 
-  // F(n)/F(n-1) 비율 표시
-  ctx.fillStyle = "black";
+  // x축 라벨
   ctx.font = "14px Arial";
-  for (let i = 1; i < fib.length; i++) {
-    const x = margin + (i / (fib.length - 1)) * width;
-    const y = canvas.height - margin - (fib[i] / max) * height;
-    const ratio = (fib[i] / fib[i - 1]).toFixed(3);
-    ctx.fillText(ratio, x + 2, y - 2);
+  ctx.fillText("항 번호 (n)", canvas.width / 2 - 30, canvas.height - padding + 35);
+
+  // y축 라벨
+  ctx.save();
+  ctx.translate(25, canvas.height / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText("피보나치 수 F(n)", 0, 0);
+  ctx.restore();
+
+  // x축 눈금
+  ctx.font = "12px Arial";
+  for (let i = 0; i < n; i++) {
+    let x = padding + (i / (n - 1)) * graphWidth;
+    ctx.fillText(i + 1, x - 4, canvas.height - padding + 20);
   }
 
-  // 황금비 사각형
-  const startX = canvas.width - 180;
-  const startY = 50;
-  const side = 100;
+  // y축 눈금 자동 조절
+  let yTicks = n <= 5 ? 5 : n <= 15 ? 10 : 15;
 
-  ctx.strokeStyle = "red";
-  ctx.lineWidth = 2;
+  for (let i = 0; i <= yTicks; i++) {
+    let value = Math.round((maxValue / yTicks) * i);
+    let y = canvas.height - padding - (value / maxValue) * graphHeight;
+    if (y < padding) y = padding;
 
-  // 정사각형
-  ctx.strokeRect(startX, startY, side, side);
+    let xPos = 50 - value.toString().length * 3;
+    ctx.fillText(value, xPos, y + 4);
+  }
 
-  // 황금비 사각형
-  ctx.strokeRect(startX - side * 1.618, startY, side * 1.618, side);
+  // 그래프 선
+  ctx.beginPath();
+  ctx.strokeStyle = "#1f4fd8";
+  ctx.lineWidth = 3;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
 
-  ctx.fillStyle = "black";
-  ctx.fillText("가로: 1.618", startX - 50, startY + 15);
-  ctx.fillText("세로: 1", startX + 5, startY + side / 2);
+  fib.forEach((value, index) => {
+    let x = padding + (index / (n - 1)) * graphWidth;
+    let y = canvas.height - padding - (value / maxValue) * graphHeight;
+    if (y < padding) y = padding;
+
+    if (index === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+
+  ctx.stroke();
 }
-
-// 페이지 로드 시 자동 실행
-window.onload = calculate;
