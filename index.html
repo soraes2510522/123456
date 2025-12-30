@@ -5,85 +5,94 @@
   <title>피보나치 수열 알고리즘 탐구</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="container">
 
-  <h1>피보나치 수열 알고리즘 탐구</h1>
+    <h1>피보나치 수열 알고리즘 탐구</h1>
 
-  <section>
-    <h2>① 알고리즘이란?</h2>
-    <p>
-      알고리즘이란 문제를 해결하기 위한 명확한 절차나 방법을 의미한다.
-      컴퓨터과학에서는 반복문, 조건문 등을 활용하여
-      사람이 정한 순서대로 계산이 자동으로 수행되도록 만든다.
-      피보나치 수열은 이러한 알고리즘 개념을 이해하기에 매우 적합한 예시이다.
-    </p>
-  </section>
+    <section class="card">
+      <h2>① 알고리즘이란?</h2>
+      <p>
+        알고리즘이란 문제를 해결하기 위해 정해진 절차에 따라
+        단계적으로 수행하는 방법을 의미한다.
+        컴퓨터는 이러한 알고리즘을 기반으로 반복문과 조건문을 활용하여
+        계산을 수행한다.
+      </p>
+    </section>
 
-  <section>
-    <h2>② 피보나치 수열이란?</h2>
-    <p>
-      피보나치 수열은 앞의 두 항을 더해 다음 항을 만드는 수열이다.
-      일반적으로 다음과 같이 정의된다.
-    </p>
-    <p class="formula">
-      F(1) = 0, F(2) = 1<br>
-      F(n) = F(n−1) + F(n−2) (n ≥ 3)
-    </p>
-    <p>
-      이 수열은 자연 현상, 식물의 잎 배열, 건축, 예술 등
-      다양한 분야에서 발견된다.
-    </p>
-  </section>
+    <section class="card">
+      <h2>② 피보나치 수열이란?</h2>
+      <p>
+        피보나치 수열은 앞의 두 항의 합으로 다음 항을 만드는 수열이다.
+        수학적으로는 다음과 같이 정의된다.
+      </p>
+      <p><strong>F(0)=0, F(1)=1</strong></p>
+      <p><strong>F(n)=F(n−1)+F(n−2)</strong></p>
+      <p>
+        이 수열은 자연 현상, 예술, 건축 등 다양한 분야에서 나타나며
+        황금비와 깊은 관련이 있다.
+      </p>
+    </section>
 
-  <section>
-    <h2>③ 피보나치 수열 계산</h2>
-    <p class="notice">
-      ※ 그래프 가독성을 위해 최대 20항까지만 입력할 수 있습니다.
-    </p>
-    <input type="number" id="n" placeholder="항의 개수 입력 (2~20)">
-    <button onclick="calculate()">수열 계산</button>
+    <section class="card">
+      <h2>③ 피보나치 수열 계산</h2>
+      <p>
+        반복문을 이용한 알고리즘을 통해 피보나치 수열을 계산한다.
+        재귀 방식보다 효율적이며 많은 항을 빠르게 계산할 수 있다.
+      </p>
 
-    <pre id="result">여기에 결과가 출력됩니다.</pre>
-  </section>
+      <input type="number" id="n" placeholder="항의 개수 입력 (2~20)">
+      <button onclick="calculate()">수열 계산</button>
 
-  <section>
-    <h2>④ 계산 결과 표</h2>
-    <table id="fibTable">
-      <thead>
-        <tr>
-          <th>항 번호 (n)</th>
-          <th>피보나치 수 F(n)</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </section>
+      <pre id="result">여기에 결과가 출력됩니다.</pre>
+    </section>
 
-  <section>
-    <h2>⑤ 피보나치 수열 증가 그래프</h2>
-    <canvas id="chart" width="700" height="400"></canvas>
-    <p>
-      x축은 항 번호(n), y축은 피보나치 수 F(n)을 나타낸다.
-      항이 증가할수록 수열 값이 급격히 커지는 모습을 확인할 수 있다.
-    </p>
-  </section>
+    <section class="card">
+      <h2>④ 계산 결과 표 (황금비 확인)</h2>
+      <table id="fibTable">
+        <thead>
+          <tr>
+            <th>항 번호 (n)</th>
+            <th>피보나치 수 F(n)</th>
+            <th>이웃한 항의 비 F(n) / F(n−1)</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-  <section>
-    <h2>⑥ 황금비와의 관계</h2>
-    <p>
-      연속된 두 피보나치 수의 비
-      F(n+1) ÷ F(n)는
-      n이 커질수록 일정한 값에 수렴한다.
-    </p>
-    <p class="formula">
-      황금비 φ = (1 + √5) / 2 ≈ 1.618
-    </p>
-    <p>
-      이는 피보나치 수열이 황금비와 깊은 수학적 관련을 갖는 이유이다.
-    </p>
-  </section>
+      <p>
+        표에서 연속된 두 피보나치 수의 비가
+        점점 <strong>1.618</strong>에 가까워지는 것을 확인할 수 있다.
+        이 값이 바로 황금비이다.
+      </p>
+    </section>
 
-  <script src="script.js"></script>
+    <section class="card">
+      <h2>⑤ 피보나치 수열 증가 그래프</h2>
+      <canvas id="chart" width="700" height="400"></canvas>
+      <p>
+        그래프의 x축은 항 번호(n),
+        y축은 피보나치 수 F(n)을 나타낸다.
+        항이 증가할수록 값이 급격히 커지는 모습을 확인할 수 있다.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>⑥ 황금비와의 관계</h2>
+      <p>
+        황금비는 약 <strong>1.618</strong>이며,
+        다음과 같은 공식으로 표현된다.
+      </p>
+      <p><strong>φ = (1 + √5) / 2 ≈ 1.618</strong></p>
+      <p>
+        피보나치 수열에서 연속된 두 항의 비
+        F(n)/F(n−1)은 n이 커질수록
+        황금비에 수렴한다.
+      </p>
+    </section>
+
+    <script src="script.js"></script>
+  </div>
 </body>
 </html>
