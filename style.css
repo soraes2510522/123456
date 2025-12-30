@@ -9,50 +9,50 @@ h1 {
 }
 
 input {
-  padding: 5px;
+  padding: 6px;
   margin-right: 10px;
 }
 
 button {
-  padding: 6px 12px;
+  padding: 6px 14px;
   cursor: pointer;
 }
 
 .notice {
-  color: gray;
-  font-size: 14px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.formula {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: "Courier New", monospace;
 }
 
 pre {
   background-color: #f4f4f4;
   padding: 10px;
-  margin-top: 10px;
   white-space: pre-wrap;
 }
 
-canvas {
-  border: 1px solid black;
-  margin-top: 20px;
-}
-
-/* 표 스타일 */
 table {
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: 10px;
   width: 100%;
 }
 
 th, td {
   border: 1px solid #aaa;
-  padding: 8px;
+  padding: 6px;
   text-align: center;
 }
 
 th {
-  background-color: #f0f0f0;
+  background-color: #eaeaea;
 }
 
-.formula {
-  margin-left: 20px;
-  font-weight: bold;
+canvas {
+  border: 1px solid black;
+  margin-top: 20px;
 }
