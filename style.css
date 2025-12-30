@@ -1,35 +1,106 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 30px;
-  line-height: 1.7;
+  font-family: "Pretendard", Arial, sans-serif;
+  background-color: #f2f4f8;
+  margin: 0;
+  padding: 40px 0;
+  color: #1f2a44;
+}
+
+.container {
+  width: 900px;
+  max-width: 92%;
+  margin: auto;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 40px;
+  color: #1f2a44;
+}
+
+.card {
+  background: white;
+  padding: 28px 32px;
+  margin-bottom: 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 h2 {
-  margin-top: 35px;
+  margin-top: 0;
+  color: #1f2a44;
+  border-left: 5px solid #d4af37;
+  padding-left: 10px;
+}
+
+.formula {
+  background-color: #f9f6ec;
+  padding: 10px;
+  border-left: 4px solid #d4af37;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.notice {
+  color: #8b0000;
+  font-size: 14px;
 }
 
 input {
-  padding: 6px;
-  margin-right: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 button {
-  padding: 6px 14px;
+  padding: 8px 16px;
+  margin-left: 10px;
+  background-color: #1f2a44;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #d4af37;
+  color: #1f2a44;
+}
+
 pre {
-  background-color: #f4f4f4;
-  padding: 12px;
-  margin-top: 12px;
-  white-space: pre-wrap;
+  background-color: #f2f4f8;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #1f2a44;
+  color: white;
 }
 
 canvas {
-  border: 1px solid black;
-  margin-top: 20px;
+  display: block;
+  margin: 20px auto 0;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.graph-desc {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
 }
