@@ -1,12 +1,17 @@
 function calculate() {
   const n = parseInt(document.getElementById("n").value);
   const result = document.getElementById("result");
-  const tableBody = document.querySelector("#fibTable tbody");
   const canvas = document.getElementById("chart");
   const ctx = canvas.getContext("2d");
 
-  if (isNaN(n) || n < 2 || n > 20) {
-    result.textContent = "항의 개수는 2 이상 20 이하로 입력하세요.";
+  if (n < 2) {
+    result.textContent = "2 이상의 수를 입력하세요.";
+    return;
+  }
+
+  if (n > 20) {
+    result.textContent =
+      "항의 개수는 최대 20까지 입력할 수 있습니다.\n그래프 가독성을 위한 제한입니다.";
     return;
   }
 
@@ -16,23 +21,8 @@ function calculate() {
     fib[i] = fib[i - 1] + fib[i - 2];
   }
 
-  // 텍스트 출력
+  // 결과 출력
   result.textContent = fib.join(", ");
-
-  // 표 초기화
-  tableBody.innerHTML = "";
-
-  for (let i = 1; i < fib.length; i++) {
-    const ratio = fib[i - 1] !== 0 ? (fib[i] / fib[i - 1]).toFixed(5) : "-";
-    const row = document.createElement("tr");
-
-    row.innerHTML = `
-      <td>${i}</td>
-      <td>${fib[i]}</td>
-      <td>${ratio}</td>
-    `;
-    tableBody.appendChild(row);
-  }
 
   // 그래프 초기화
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -40,19 +30,21 @@ function calculate() {
   const padding = 70;
   const graphWidth = canvas.width - padding * 2;
   const graphHeight = canvas.height - padding * 2;
+
   const maxValue = Math.max(...fib);
 
-  // 축
+  // 축 그리기
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
   ctx.lineTo(canvas.width - padding, canvas.height - padding);
   ctx.stroke();
 
-  // 축 이름
+  // x축 이름
   ctx.font = "14px Arial";
-  ctx.fillText("항 번호 (n)", canvas.width / 2 - 30, canvas.height - 20);
+  ctx.fillText("항 번호 (n)", canvas.width / 2 - 30, canvas.height - padding + 35);
 
+  // y축 이름
   ctx.save();
   ctx.translate(20, canvas.height / 2);
   ctx.rotate(-Math.PI / 2);
@@ -63,7 +55,7 @@ function calculate() {
   ctx.font = "12px Arial";
   for (let i = 0; i < n; i++) {
     let x = padding + (i / (n - 1)) * graphWidth;
-    ctx.fillText(i + 1, x - 4, canvas.height - padding + 20);
+    ctx.fillText(i + 1, x - 5, canvas.height - padding + 20);
   }
 
   // y축 눈금
@@ -71,7 +63,7 @@ function calculate() {
   for (let i = 0; i <= yTicks; i++) {
     let value = Math.round((maxValue / yTicks) * i);
     let y = canvas.height - padding - (value / maxValue) * graphHeight;
-    ctx.fillText(value, 30, y + 3);
+    ctx.fillText(value, 40, y + 3);
   }
 
   // 그래프 선
