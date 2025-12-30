@@ -1,11 +1,15 @@
 body {
   font-family: Arial, sans-serif;
   margin: 30px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 h1 {
   text-align: center;
+}
+
+h2 {
+  margin-top: 35px;
 }
 
 input {
@@ -18,38 +22,11 @@ button {
   cursor: pointer;
 }
 
-.notice {
-  font-size: 0.9em;
-  color: #555;
-}
-
-.formula {
-  background-color: #f4f4f4;
-  padding: 10px;
-  margin: 10px 0;
-  font-family: "Courier New", monospace;
-}
-
 pre {
   background-color: #f4f4f4;
-  padding: 10px;
+  padding: 12px;
+  margin-top: 12px;
   white-space: pre-wrap;
-}
-
-table {
-  border-collapse: collapse;
-  margin-top: 10px;
-  width: 100%;
-}
-
-th, td {
-  border: 1px solid #aaa;
-  padding: 6px;
-  text-align: center;
-}
-
-th {
-  background-color: #eaeaea;
 }
 
 canvas {
