@@ -19,11 +19,20 @@ function calculate() {
   // ② 텍스트 출력
   result.textContent = fib.join(", ");
 
-  // ③ 표 출력
+  // ③ 표 출력 (황금비 비율 포함)
   tableBody.innerHTML = "";
   fib.forEach((value, index) => {
+    let ratio = "-";
+    if (index >= 2) {
+      ratio = (fib[index] / fib[index - 1]).toFixed(3);
+    }
+
     const row = document.createElement("tr");
-    row.innerHTML = `<td>${index + 1}</td><td>${value}</td>`;
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${value}</td>
+      <td>${ratio}</td>
+    `;
     tableBody.appendChild(row);
   });
 
@@ -35,7 +44,7 @@ function calculate() {
   const graphHeight = canvas.height - padding * 2;
   const maxValue = Math.max(...fib);
 
-  // ⑤ 축
+  // ⑤ 축 그리기
   ctx.strokeStyle = "#333";
   ctx.lineWidth = 2;
   ctx.beginPath();
