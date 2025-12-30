@@ -4,18 +4,24 @@ function calculate() {
   const canvas = document.getElementById("chart");
   const ctx = canvas.getContext("2d");
 
-  if (n < 2) {
-    result.textContent = "2 이상의 수를 입력하세요.";
+  // 입력값 제한
+  if (isNaN(n) || n < 2 || n > 20) {
+    result.textContent =
+      "⚠ 항의 개수는 2 이상 20 이하로 입력해야 합니다.\n\n" +
+      "피보나치 수열은 항이 증가할수록 값이 매우 빠르게 커지므로\n" +
+      "그래프 시각화와 프로그램의 안정적인 실행을 위해\n" +
+      "최대 항 개수를 20으로 제한하였습니다.";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     return;
   }
 
-  // ① 피보나치 수열 계산 (반복 알고리즘)
+  // ① 반복 알고리즘으로 피보나치 수열 계산
   let fib = [0, 1];
   for (let i = 2; i < n; i++) {
     fib[i] = fib[i - 1] + fib[i - 2];
   }
 
-  // ② 텍스트 결과 출력
+  // ② 텍스트 출력
   result.textContent = fib.join(", ");
 
   // ③ 그래프 초기화
@@ -24,46 +30,43 @@ function calculate() {
   const padding = 70;
   const graphWidth = canvas.width - padding * 2;
   const graphHeight = canvas.height - padding * 2;
-
   const maxValue = Math.max(...fib);
 
-  // ④ 축 그리기
+  // ④ 축
   ctx.beginPath();
   ctx.moveTo(padding, padding);
   ctx.lineTo(padding, canvas.height - padding);
   ctx.lineTo(canvas.width - padding, canvas.height - padding);
   ctx.stroke();
 
-  // ⑤ x축 이름
+  // x축 라벨
   ctx.font = "14px Arial";
   ctx.fillText("항 번호 (n)", canvas.width / 2 - 30, canvas.height - padding + 35);
 
-  // ⑥ y축 이름
+  // y축 라벨
   ctx.save();
-  ctx.translate(20, canvas.height / 2);
+  ctx.translate(25, canvas.height / 2);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText("피보나치 수 F(n)", 0, 0);
   ctx.restore();
 
-  // ⑦ x축 눈금
+  // x축 눈금
   ctx.font = "12px Arial";
   for (let i = 0; i < n; i++) {
     let x = padding + (i / (n - 1)) * graphWidth;
     ctx.fillText(i + 1, x - 5, canvas.height - padding + 20);
   }
 
-  // ⑧ y축 눈금
-  let yTicks = n <= 5 ? 5 : n <= 15 ? 10 : 15;
-
+  // y축 눈금
+  let yTicks = 10;
   for (let i = 0; i <= yTicks; i++) {
     let value = Math.round((maxValue / yTicks) * i);
     let y = canvas.height - padding - (value / maxValue) * graphHeight;
     if (y < padding) y = padding;
-
-    ctx.fillText(value, 40, y + 3);
+    ctx.fillText(value, 40 - value.toString().length * 3, y + 3);
   }
 
-  // ⑨ 그래프 선
+  // ⑤ 그래프 선
   ctx.beginPath();
   ctx.strokeStyle = "blue";
   ctx.lineWidth = 3;
@@ -72,7 +75,6 @@ function calculate() {
     let x = padding + (index / (n - 1)) * graphWidth;
     let y = canvas.height - padding - (value / maxValue) * graphHeight;
     if (y < padding) y = padding;
-
     if (index === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   });
